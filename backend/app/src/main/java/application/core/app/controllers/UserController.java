@@ -1,5 +1,7 @@
 package application.core.app.controllers;
 
+import application.core.app.dtos.UserRequestDTO;
+import application.core.app.dtos.UserResponseDTO;
 import application.core.app.models.User;
 import application.core.app.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,20 +19,20 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getUsers(){
+    public List<UserResponseDTO> getUsers(){
         return userService.getAllUsers();
     }
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id){
+    public UserResponseDTO getUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
     @PostMapping
-    public User createuser(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<UserResponseDTO> createuser(@RequestBody UserRequestDTO userDTO){
+        return userService.createUser(userDTO);
     }
     @PutMapping("/{id}")
-     public User updateUser(@PathVariable Long id, @RequestBody User userDetails){
-        return userService.updateUser(id, userDetails);
+     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userDTO){
+        return userService.updateUser(id, userDTO);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
