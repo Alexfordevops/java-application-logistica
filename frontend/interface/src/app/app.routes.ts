@@ -9,7 +9,7 @@ export const routes: Routes = [
     {path: "", component:LoginPageComponent},
     {path: "login", component:LoginPageComponent},
     {path: "home", component:HomePageComponent, canActivate: [authGuard]}, //Protegida
-    {path: "register", component:RegisterPageComponent, canActivate: [authGuard]},
+    {path: "register", component:RegisterPageComponent},
     {path: "create-product", component:ProductCreatePageComponent, canActivate: [authGuard]},
     { path: '**', redirectTo: 'login' } // Redireciona qualquer outra rota para login
 ];

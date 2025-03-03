@@ -1,5 +1,7 @@
 package application.core.app.controllers;
 
+import application.core.app.dtos.RegisterRequestDTO;
+import application.core.app.dtos.RegisterResponseDTO;
 import application.core.app.requestsBody.LoginRequest;
 import application.core.app.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,9 @@ public class LoginController {
     public ResponseEntity<Boolean> verifyPassword(@RequestBody LoginRequest request) {
         boolean validPassword = loginService.verifyPassword(request.getLogin(), request.getPassword());
         return ResponseEntity.ok(validPassword);
+    }
+    @PostMapping("/registerUser")
+    public ResponseEntity<RegisterResponseDTO> registerUser(@RequestBody RegisterRequestDTO requestDTO){
+        return loginService.registerUser(requestDTO);
     }
 }

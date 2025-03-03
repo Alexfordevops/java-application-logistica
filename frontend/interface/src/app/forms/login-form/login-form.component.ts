@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AutenticationService } from '../../services/autentication/autentication.service';
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
+import { RedirectService } from '../../services/redirect/redirect.service';
 
 @Component({
   selector: 'app-login-form',
   standalone:true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
@@ -20,7 +21,8 @@ export class LoginFormComponent {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private auth: AutenticationService) {
+              private auth: AutenticationService,
+              private redirectService: RedirectService) {
 
     this.loginForm = this.fb.group({
       login: ['', Validators.required],
@@ -29,12 +31,15 @@ export class LoginFormComponent {
   }
 
   OnSubimit(){
-
     const login = this.loginForm.value.login;
     const password = this.loginForm.value.password;
 
     if (this.loginForm.valid){
-      this.auth.autenticationCreate(login, password);
+      this.auth.autenticationForLogin(login, password);
     }
+  }
+
+  goToRegister(){
+    this.redirectService.navToRegister()
   }
 }

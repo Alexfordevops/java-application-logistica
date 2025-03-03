@@ -12,7 +12,7 @@ export class AutenticationService {
               private userApi: UserApiConnectService,
               private storageService: StorageService) { }
 
-  autenticationCreate(login: string, password: any) {
+  autenticationForLogin(login: string, password: any) {
     // Verifica se o login existe de forma assíncrona
     this.userApi.verifyLogin(login).subscribe(existe => {
       if (existe) {
@@ -32,6 +32,11 @@ export class AutenticationService {
         console.log("Server #: User don't exist in database")
       }
     });
+  }
+  autenticationForRegistry(){
+    this.storageService.setItem('token', 'user-token'); // Armazena o token
+    this.router.navigate(['/home']); // Redireciona para o home após o login
+    console.log("Server #: autentication by registry")
   }
   autenticationDelete(){
     this.storageService.setItem('token', ''); // Remove o token

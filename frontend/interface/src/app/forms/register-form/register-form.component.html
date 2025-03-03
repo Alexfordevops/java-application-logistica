@@ -1,0 +1,34 @@
+<div class="register-container">
+    <h2>Cadastro de Usuário</h2>
+  
+    <form [formGroup]="registerForm" (ngSubmit)="OnSubimit()" class="register-form">
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input id="login" formControlName="login" type="text" class="form-control" placeholder="Digite o login" />
+        <div *ngIf="registerForm.get('login')?.invalid && registerForm.get('login')?.touched" class="error-message">
+          Login é obrigatório.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input id="password" formControlName="password" type="password" class="form-control" placeholder="Digite a senha" />
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+          Senha é obrigatória.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input id="name" formControlName="name" type="text" class="form-control" placeholder="Digite o nome completo" />
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error-message">
+          Nome é obrigatório.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+        Registrar
+      </button>
+    </form>
+  </div>
+  
