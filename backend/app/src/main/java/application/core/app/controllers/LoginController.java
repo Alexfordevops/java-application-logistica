@@ -1,0 +1,27 @@
+package application.core.app.controllers;
+
+import application.core.app.requestsBody.LoginRequest;
+import application.core.app.services.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/login")
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    @GetMapping("/verifyUserExist")
+    public ResponseEntity<Boolean> verifyUserExist(@RequestParam String login) {
+        boolean exist = loginService.verifyUserExist(login);
+        return ResponseEntity.ok(exist);
+    }
+
+    @PostMapping("/verifyPassword")
+    public ResponseEntity<Boolean> verifyPassword(@RequestBody LoginRequest request) {
+        boolean validPassword = loginService.verifyPassword(request.getLogin(), request.getPassword());
+        return ResponseEntity.ok(validPassword);
+    }
+}
