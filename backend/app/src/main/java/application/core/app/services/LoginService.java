@@ -41,7 +41,8 @@ public class LoginService {
                 savedUser.getName(),
                 savedUser.getLogin(),
                 savedUser.getStatus(),
-                savedUser.getAccessLevel()
+                savedUser.getAccessLevel(),
+                savedUser.getCreatedAt()
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }

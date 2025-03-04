@@ -29,7 +29,8 @@ public class UserService {
                         user.getName(),
                         user.getLogin(),
                         user.getStatus(),
-                        user.getAccessLevel()))
+                        user.getAccessLevel(),
+                        user.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
@@ -41,7 +42,8 @@ public class UserService {
                 user.getName(),
                 user.getLogin(),
                 user.getStatus(),
-                user.getAccessLevel()
+                user.getAccessLevel(),
+                user.getCreatedAt()
         );
     }
 
@@ -59,12 +61,13 @@ public class UserService {
                 savedUser.getName(),
                 savedUser.getLogin(),
                 savedUser.getStatus(),
-                savedUser.getAccessLevel()
+                savedUser.getAccessLevel(),
+                savedUser.getCreatedAt()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
-    //[UPDATE] Atualizar usuário por id !!Só funciona com postman, atualizar para ng form!!
+    //[UPDATE] Atualizar usuário por id
     public ResponseEntity<UserResponseDTO> updateUser(Long id, UserRequestDTO userDTO){
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setName(userDTO.getName());
@@ -78,7 +81,8 @@ public class UserService {
                 updatedUser.getName(),
                 updatedUser.getLogin(),
                 updatedUser.getStatus(),
-                updatedUser.getAccessLevel()
+                updatedUser.getAccessLevel(),
+                updatedUser.getCreatedAt()
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }

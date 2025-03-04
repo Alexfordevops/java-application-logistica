@@ -1,0 +1,29 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 90px;
+    ul{
+        margin-top: 25px;
+        margin-left: 25px
+    }
+  }
+  
+  .nav-link {
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #495057;
+    border-radius: 5px;
+  }

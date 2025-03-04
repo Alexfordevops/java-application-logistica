@@ -1,0 +1,52 @@
+<h1>Create product</h1>
+
+<div class="create-product-form">
+  <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input id="name" formControlName="name" class="form-control" type="text" placeholder="Nome do produto" />
+      <div *ngIf="createProductForm.get('name')?.invalid && createProductForm.get('name')?.touched" class="text-danger">
+        Nome é obrigatório.
+      </div>
+    </div>
+
+    <!-- Categoria -->
+    <div class="form-group">
+      <label for="category">Categoria</label>
+      <input id="category" formControlName="category" class="form-control" type="text" placeholder="Categoria do produto" />
+      <div *ngIf="createProductForm.get('category')?.invalid && createProductForm.get('category')?.touched" class="text-danger">
+        Categoria é obrigatória.
+      </div>
+    </div>
+
+    <!-- Quantidade -->
+    <div class="form-group">
+      <label for="quantity">Quantidade</label>
+      <input id="quantity" formControlName="quantity" class="form-control" type="number" placeholder="Quantidade do produto" />
+      <div *ngIf="createProductForm.get('quantity')?.invalid && createProductForm.get('quantity')?.touched" class="text-danger">
+        A quantidade deve ser maior que 0.
+      </div>
+    </div>
+
+    <!-- Preço -->
+    <div class="form-group">
+      <label for="price">Preço</label>
+      <input id="price" formControlName="price" class="form-control" type="number" placeholder="Preço do produto" />
+      <div *ngIf="createProductForm.get('price')?.invalid && createProductForm.get('price')?.touched" class="text-danger">
+        O preço deve ser maior que 0.
+      </div>
+    </div>
+
+    <!-- Data de Criação (somente leitura) -->
+    <div class="form-group">
+      <label for="creationDate">Data de Criação</label>
+      <input id="creationDate" formControlName="creationDate" class="form-control" type="text" [value]="createProductForm.get('creationDate')?.value" readonly />
+    </div>
+
+    <!-- Botão de submissão -->
+    <button type="submit" class="btn btn-primary" [disabled]="createProductForm.invalid">Criar Produto</button>
+  </form>
+</div>
+

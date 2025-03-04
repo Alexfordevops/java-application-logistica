@@ -1,2 +1,15 @@
-<app-navbar></app-navbar>
-<p>home-page works!</p>
+<div class="global">
+    <div class="navbar">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="page">
+        <div class="left-menu">
+            <a>menu</a>
+            <app-left-menu (statusChange)="createFormShow($event)"></app-left-menu>
+        </div>
+        <div class="central-content">
+            <a>{{createForm}}</a>
+            <app-create-product *ngIf="createForm"></app-create-product>
+        </div>
+    </div>
+</div>
