@@ -18,7 +18,7 @@ export class NavbarComponent {
     this.redirect.navToHome();
   }
   logout(){
-    this.auth.autenticationDelete;
+    this.auth.autenticationDelete();
   }
 
 }
