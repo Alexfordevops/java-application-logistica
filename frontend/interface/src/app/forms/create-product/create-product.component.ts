@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';  // Importe o ReactiveFormsModule
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-product',
@@ -15,9 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';  // Importe o ReactiveForm
 })
 export class CreateProductComponent {
   createProductForm!: FormGroup;
-  apiPostUrl: string = 'http/localhost:8080/products/create'
+  apiPostUrl: string = 'http://localhost:8080/products/create'
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.createProductForm = this.fb.group({
@@ -31,10 +34,19 @@ export class CreateProductComponent {
 
   onSubmit(): void {
     if (this.createProductForm.valid) {
-      
+      const createData = this.createProductForm.getRawValue();
+      this.http.post(this.apiPostUrl, createData).subscribe(pass => {
+        if (pass){
+          console.log("Server #: Product created")
+          alert("Produto criado")
+        }else{
+          console.log("Server #: (error) Product failed to create")
+          alert("Produto não foi não foi criado")
+        }
+      })
       
     } else {
-      console.log('Formulário inválido');
+      console.log('Server #: Form invalid');
       console.log(this.createProductForm.value);
     }
   }

@@ -24,7 +24,7 @@ export class UpdateProductComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private http: HttpClient
+              private http: HttpClient,
   ){}
 
   loadProducts(): void {
@@ -68,7 +68,6 @@ export class UpdateProductComponent implements OnInit {
   OnSubimit():void{
     if (this.productForm.valid){
       const productData = this.productForm.getRawValue();
-      console.log(productData.id)
       this.http.put(`${this.apiTestUrl}/${productData.id}`, productData).subscribe({
         next: () => console.log("Server #: Data updated sucefully"),
         error: (err) => console.log(("Server #: (error) Data update error"))
