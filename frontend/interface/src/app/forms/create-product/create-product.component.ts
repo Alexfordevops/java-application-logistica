@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';  // Importe o ReactiveForm
 })
 export class CreateProductComponent {
   createProductForm!: FormGroup;
+  apiPostUrl: string = 'http/localhost:8080/products/create'
 
   constructor(private fb: FormBuilder) {}
 
@@ -30,10 +31,11 @@ export class CreateProductComponent {
 
   onSubmit(): void {
     if (this.createProductForm.valid) {
-      console.log(this.createProductForm.value);
-      // Aqui você pode enviar os dados para o backend (API)
+      
+      
     } else {
       console.log('Formulário inválido');
+      console.log(this.createProductForm.value);
     }
   }
 }

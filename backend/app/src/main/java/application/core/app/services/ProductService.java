@@ -28,6 +28,7 @@ public class ProductService {
         return productRepository.findAll()
                 .stream()
                 .map(product -> new ProductResponseDTO(
+                        product.getId(),
                         product.getName(),
                         product.getCategory(),
                         product.getQuantity(),
@@ -44,6 +45,7 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         Product savedProduct = productRepository.save(product);
         ProductResponseDTO responseDTO = new ProductResponseDTO(
+                savedProduct.getId(),
                 savedProduct.getName(),
                 savedProduct.getCategory(),
                 savedProduct.getQuantity(),
@@ -53,7 +55,7 @@ public class ProductService {
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
 
     }
-    //[POST] atualiza produto por id
+    //[PUT] atualiza produto por id
     public ResponseEntity<ProductResponseDTO> updateProduct(Long id, ProductRequestDTO productDTO){
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         product.setName(productDTO.getName());
@@ -62,6 +64,25 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         Product savedProduct = productRepository.save(product);
         ProductResponseDTO responseDTO = new ProductResponseDTO(
+                savedProduct.getId(),
+                savedProduct.getName(),
+                savedProduct.getCategory(),
+                savedProduct.getQuantity(),
+                savedProduct.getPrice(),
+                savedProduct.getCreationDate()
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
+    }
+    //[PUT] atualiza produto por name
+    public ResponseEntity<ProductResponseDTO> updateProductByName(String name, ProductRequestDTO productDTO){
+        Product product = productRepository.findByName(name).orElseThrow(() -> new RuntimeException("User not found"));
+        product.setName(productDTO.getName());
+        product.setCategory(productDTO.getCategory());
+        product.setQuantity(productDTO.getQuantity());
+        product.setPrice(productDTO.getPrice());
+        Product savedProduct = productRepository.save(product);
+        ProductResponseDTO responseDTO = new ProductResponseDTO(
+                savedProduct.getId(),
                 savedProduct.getName(),
                 savedProduct.getCategory(),
                 savedProduct.getQuantity(),
