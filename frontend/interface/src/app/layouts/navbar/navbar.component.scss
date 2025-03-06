@@ -1,12 +1,52 @@
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  .logo {
-    width: 50px;
-    height: auto;
-  }
-  
+/* 🔹 Navbar fixada no topo e ocupando toda a largura */
+.custom-navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  border-radius: 0; /* Remove bordas arredondadas para cobrir todo o topo */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Ajustando a Logo */
+.logo {
+  width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* 🔹 Links da Navbar */
+.custom-link {
+  color: white !important;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.custom-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffcc00 !important;
+}
+
+/* 🔹 Botão de Logout */
+.custom-btn {
+  background-color: #dc3545;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-btn:hover {
+  background-color: #bb2d3b;
+  transform: scale(1.05);
+}
+
+/* 🔹 Ajuste para evitar sobreposição da navbar no conteúdo */
+body {
+  padding-top: 80px; /* Ajusta o espaço para compensar a navbar fixa */
+}

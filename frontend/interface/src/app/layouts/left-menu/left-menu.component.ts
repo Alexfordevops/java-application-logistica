@@ -18,6 +18,9 @@ export class LeftMenuComponent {
   @Output() statusChangeUpdate = new EventEmitter<boolean>();
   updateForm: boolean = false;
 
+  @Output() statusChangeDelete = new EventEmitter<boolean>();
+  deleteForm: boolean = false;
+
   //Torna a variável true e envia para o home-page-component para o formulário de criação
   createFormShow(){
     this.createForm = !this.createForm;
@@ -27,6 +30,10 @@ export class LeftMenuComponent {
   updateFormShow(){
     this.updateForm = !this.updateForm;
     this.statusChangeUpdate.emit(this.updateForm);
+  }
+  deleteFormShow(){
+    this.deleteForm = !this.deleteForm;
+    this.statusChangeDelete.emit(this.deleteForm);
   }
 
 }

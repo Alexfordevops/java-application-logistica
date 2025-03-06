@@ -1,31 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <!-- Logo e Nome da Empresa -->
-      <div class="d-flex flex-column align-items-center me-3">
-        <img src="logo.png" alt="Logo" class="logo">
-        <span class="text-white">GestorEstoque.com</span>
-      </div>
-  
-      <!-- Links de Navegação -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link text-white" (click)="goToHome()">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" routerLink="/admin">Administrador</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" routerLink="/inventario">Inventário</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" routerLink="/relatorio">Relatório</a>
-          </li>
-        </ul>
-      </div>
-  
-      <!-- Botão de Logout -->
-      <button class="btn btn-danger" (click)="logout()">Logout</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
+  <div class="container-fluid">
+    <!-- Logo e Nome da Empresa -->
+    <div class="d-flex flex-column align-items-center me-3">
+      <img src="logo.png" alt="Logo" class="logo">
+      <span class="text-white fw-bold fs-5">GestorEstoque.com</span>
     </div>
-  </nav>
-  
+
+    <!-- Links de Navegação -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link custom-link" (click)="goToHome()">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link custom-link" routerLink="/admin">Administrador</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link custom-link" routerLink="/inventario">Inventário</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link custom-link" routerLink="/relatorio">Relatório</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botão de Logout -->
+    <button class="btn custom-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,5 +91,10 @@ public class ProductService {
                 savedProduct.getCreationDate()
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
+    }
+    //[DELETE] Deletar produto por id
+    public ResponseEntity<Map<String, String>> deleteProduct(Long id){
+        productRepository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Product deleted"));
     }
 }

@@ -5,22 +5,21 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-update-product',
+  selector: 'app-delete-product',
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  templateUrl: './update-product.component.html',
-  styleUrl: './update-product.component.scss'
+  templateUrl: './delete-product.component.html',
+  styleUrl: './delete-product.component.scss'
 })
-export class UpdateProductComponent implements OnInit {
-  
+export class DeleteProductComponent {
+
   productForm!: FormGroup;
   products: any[] = [];
   selectedProduct: any = null;
   apiGetUrl: string = 'http://localhost:8080/products/getAll'
-  apiPutUrl: string = 'http://localhost:8080/products/update'
-
+  apiDeleteUrl: string = 'http://localhost:8080/products/delete'
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
@@ -56,26 +55,24 @@ export class UpdateProductComponent implements OnInit {
 
     this.productForm = this.fb.group({
       id: [{ value: '', disabled: true }], // ID do produto (para envio à API)
-      name: ['', [Validators.required]],
-      category: ['', [Validators.required]],
-      quantity: ['', [Validators.required, Validators.min(1)]],
-      price: ['', [Validators.required, Validators.min(0)]],
+      name: [{ value: '', disabled: true }],
+      category: [{ value: '', disabled: true }],
+      quantity: [{ value: '', disabled: true }],
+      price: [{ value: '', disabled: true }],
       creationDate: [{ value: '', disabled: true }] // Desativado, pois não pode ser alterado
     });
   }
 
   OnSubimit():void{
-    if (this.productForm.valid){
-      const productData = this.productForm.getRawValue();
-      this.http.put(`${this.apiPutUrl}/${productData.id}`, productData).subscribe({
-        next: () => {console.log("Server #: Data updated sucefully"),
-                     alert("Dados atualizados com sucesso"),
-                     this.loadProducts(); 
-        },
-        error: (err) => console.log(("Server #: (error) Data update error"))
+    const productData = this.productForm.getRawValue();
+    console.log(`DELETE URL: ${this.apiDeleteUrl}/${productData.id}`);
+      this.http.delete(`${this.apiDeleteUrl}/${productData.id}`).subscribe({
+        next: () => {console.log("Server #: Product deleted sucefully"),
+                     alert("Produto deletado"),
+                     this.loadProducts();
+                    },
+        error: (err) => {console.log(("Server #: (error) Data delete error")), alert(`Erro ao deletar: ${err.status} - ${err.message}`);}
+        
       });
-    }else{
-      alert('Preencha todos os campos corretamente.');
-    }
   }
 }

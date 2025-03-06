@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -35,5 +36,9 @@ public class ProductController {
     @PutMapping("/update/byName/{name}")
     public ResponseEntity<ProductResponseDTO> updateProductByName(@PathVariable String name, @RequestBody ProductRequestDTO productDTO){
         return productService.updateProductByName(name, productDTO);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long id){
+        return productService.deleteProduct(id);
     }
 }

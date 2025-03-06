@@ -1,0 +1,36 @@
+.listProd {
+    width: 100%;
+    max-height: 400px; // Altura máxima da tabela com rolagem
+    overflow-y: auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  // ESTILIZAÇÃO DA TABELA
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  
+    thead {
+      background: #007bff;
+      color: white;
+    }
+  
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+  
+    tbody tr {
+      cursor: pointer;
+      transition: background 0.3s;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+  
