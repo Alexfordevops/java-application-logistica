@@ -1,32 +1,12 @@
-<app-navbar></app-navbar>
 <div class="global">
-    <div class="filters-container">
-        <div class="filter-name">
-            <input #inputRef type="text" placeholder="Buscar produto" (keyup)="filterByName(inputRef.value)">
+    <div class="navbar">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="page">
+        <div class="central-content">
+            <app-product-table></app-product-table>
         </div>
     </div>
-    <div class='list-product'>
-        <table class="product-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Criação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of listFilter">
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ product.price | currency:'BRL' }}</td>
-                <td>{{ product.creationDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
 </div>
+
+
