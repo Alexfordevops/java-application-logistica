@@ -14,4 +14,7 @@ export class RedirectService {
   navToHome(){
     this.router.navigate(['/home'])
   }
+  navToInventory(){
+    this.router.navigate(['/inventory'])
+  }
 }

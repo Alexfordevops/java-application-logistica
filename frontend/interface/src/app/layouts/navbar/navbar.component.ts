@@ -17,6 +17,11 @@ export class NavbarComponent {
   goToHome(){
     this.redirect.navToHome();
   }
+
+  goToInventory(){
+    this.redirect.navToInventory();
+  }
+
   logout(){
     this.auth.autenticationDelete();
   }

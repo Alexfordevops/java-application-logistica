@@ -3,13 +3,10 @@ package application.core.app.services;
 import application.core.app.dtos.ProductRequestDTO;
 import application.core.app.dtos.ProductResponseDTO;
 import application.core.app.models.Product;
-import application.core.app.models.User;
 import application.core.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +71,7 @@ public class ProductService {
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
-    //[PUT] atualiza produto por name
+    //[PUT] atualizar produto por name
     public ResponseEntity<ProductResponseDTO> updateProductByName(String name, ProductRequestDTO productDTO){
         Product product = productRepository.findByName(name).orElseThrow(() -> new RuntimeException("User not found"));
         product.setName(productDTO.getName());
