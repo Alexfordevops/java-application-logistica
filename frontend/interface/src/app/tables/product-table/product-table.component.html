@@ -1,7 +1,23 @@
 <div class="global">
     <div class="filters-container">
         <div class="filter-name">
-            <input #inputRef type="text" placeholder="Buscar produto" (keyup)="filterByName(inputRef.value)">
+            <input #inputRefName type="text" placeholder="Buscar produto" (keyup)="filterByName(inputRefName.value)">
+        </div>
+        <div class="filter-name">
+          <input #inputRefCategory type="text" placeholder="Buscar por categoria" (keyup)="filterByCategory(inputRefCategory.value)">
+        </div>
+        <div class="filter-name">
+          <input 
+            #inputMin 
+            type="number" 
+            placeholder="Quantidade mínima"
+            (input)="filterByQuantity(inputMin.valueAsNumber, inputMax.valueAsNumber)">
+
+          <input 
+            #inputMax 
+            type="number" 
+            placeholder="Quantidade máxima"
+            (input)="filterByQuantity(inputMin.valueAsNumber, inputMax.valueAsNumber)">
         </div>
     </div>
     <div class='list-product'>
@@ -29,3 +45,4 @@
           </table>
     </div>
 </div>
+
