@@ -2,14 +2,15 @@ package application.core.app.services;
 
 import application.core.app.dtos.RegisterRequestDTO;
 import application.core.app.dtos.RegisterResponseDTO;
-import application.core.app.dtos.UserResponseDTO;
 import application.core.app.models.User;
 import application.core.app.repository.UserRepository;
-import application.core.app.requestsBody.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -46,4 +47,15 @@ public class LoginService {
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
+
+    //[GET] Verifica se o admin possui o acessLevel admin através do login
+    public ResponseEntity<Map<String, Boolean>> isAdmin(String login){
+        return userRepository.findByLogin(login)
+                .map(user -> {
+                    boolean isAdmin = "Admin".equals(user.getAccessLevel());
+                    return ResponseEntity.ok(Map.of("isAdmin", isAdmin));
+                })
+                .orElse(ResponseEntity.ok(Map.of("isAdmin", false))); // Retorna false se o usuário não for encontrado
+    }
 }
+

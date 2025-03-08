@@ -2,15 +2,27 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserApiConnectService } from '../apiRequest/user-api-connect.service';
 import { StorageService } from './storage-service.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map} from 'rxjs/operators';
+import { EndpointsService } from '../endpoints/endpoints.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticationService {
 
-  constructor(private router: Router,
-              private userApi: UserApiConnectService,
-              private storageService: StorageService) { }
+  constructor(
+    private router: Router,
+    private userApi: UserApiConnectService,
+    private storageService: StorageService,
+    private http: HttpClient,
+    private endpoint: EndpointsService,
+    
+  ) { }
+  private loginUser: string = '';
+
+  //Autentication session
 
   autenticationForLogin(login: string, password: any) {
     // Verifica se o login existe de forma assíncrona
@@ -33,14 +45,32 @@ export class AutenticationService {
       }
     });
   }
+
   autenticationForRegistry(){
     this.storageService.setItem('token', 'user-token'); // Armazena o token
     this.router.navigate(['/home']); // Redireciona para o home após o login
     console.log("Server #: autentication by registry")
   }
+
   autenticationDelete(){
     this.storageService.setItem('token', ''); // Remove o token
     this.router.navigate(['/login']); // Redireciona para a página de login
   }
 
+  autenticationVerifyAcessLevel(login:string): Observable<boolean>{
+    const endpoint = 'http://localhost:8080/login/isAdmin'
+
+    return this.http.get<{ isAdmin: boolean }>(`${endpoint}/${login}`).pipe( //pipe para retorno boolean true or false
+      map(response => response.isAdmin)
+    );
+  }
+
+  setLogin(login: string) {
+    this.loginUser = login;
+    localStorage.setItem('userLogin', login); // Opcional: salvar no localStorage
+  }
+
+  getLogin(): string {
+    return this.loginUser || localStorage.getItem('userLogin') || ''; // Buscar do serviço ou localStorage
+  }
 }

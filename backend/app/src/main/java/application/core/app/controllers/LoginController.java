@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -29,5 +31,9 @@ public class LoginController {
     @PostMapping("/registerUser")
     public ResponseEntity<RegisterResponseDTO> registerUser(@RequestBody RegisterRequestDTO requestDTO){
         return loginService.registerUser(requestDTO);
+    }
+    @GetMapping("/isAdmin/{login}")
+    public ResponseEntity<Map<String, Boolean>> isAdmin(@PathVariable String login){
+        return loginService.isAdmin(login);
     }
 }

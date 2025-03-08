@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParameterCodec } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EndpointsService } from '../../services/endpoints/endpoints.service';
 
@@ -54,7 +53,6 @@ export class ProductTableComponent {
       return quantity >= minValid && quantity <= maxValid;
     });
   }
-  
   //
 
   loadProducts(): void{

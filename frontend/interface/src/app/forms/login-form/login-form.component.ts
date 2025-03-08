@@ -29,13 +29,25 @@ export class LoginFormComponent {
       password: ['', Validators.required]
     });
   }
+  OnLogin():void{
+    //requisições de autenticação do back
+  }
 
   OnSubimit(){
     const login = this.loginForm.value.login;
     const password = this.loginForm.value.password;
 
     if (this.loginForm.valid){
-      this.auth.autenticationForLogin(login, password);
+      this.auth.autenticationForLogin(login, password); //Cria autenticação
+      this.OnLogin();
+      this.auth.autenticationVerifyAcessLevel(login).subscribe(isAdmin => { //Verifica se é admin
+        if (isAdmin) {
+          console.log('✅ O usuário é administrador');
+        } else {
+          console.log('❌ O usuário NÃO é administrador');
+        }
+      });
+      
     }
   }
 
