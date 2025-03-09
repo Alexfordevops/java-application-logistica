@@ -69,29 +69,10 @@ export class AutenticationService {
   }
 
   autenticationSetLogin(login: string){
-    this.storageService.setItem(login,"user-login")
+    this.storageService.setItem('user-login', login);
   }
 
   autenticationGetLogin(){
     this.storageService.getItem("user-login")
-  }
-
-
-
-
-
-  
-
-  sessionAdmin(): Observable<boolean> {
-    const endpoint = 'http://localhost:8080/login/sessionAdmin';
-
-    return this.http.get<{ isAdmin: boolean }>(endpoint, { withCredentials: true }).pipe(
-      map(response => response.isAdmin)
-    );
-  }
-
-  autenticateUser(login:string): Observable<any>{
-    return this.http.post<string>(`${this.setAuthenticationUrl}/${login}`, {login}, { withCredentials: true });
-
   }
 }
