@@ -5,6 +5,8 @@ import { AutenticationService } from '../../services/autentication/autentication
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { RedirectService } from '../../services/redirect/redirect.service';
+import { log } from 'console';
+import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-login-form',
@@ -29,27 +31,23 @@ export class LoginFormComponent {
       password: ['', Validators.required]
     });
   }
-  OnLogin():void{
-    //requisições de autenticação do back
-  }
 
-  OnSubimit(){
-    const login = this.loginForm.value.login;
-    const password = this.loginForm.value.password;
+OnSubimit(){
+  const login = this.loginForm.value.login;
+  const password = this.loginForm.value.password;
 
-    if (this.loginForm.valid){
-      this.auth.autenticationForLogin(login, password); //Cria autenticação
-      this.OnLogin();
-      this.auth.autenticationVerifyAcessLevel(login).subscribe(isAdmin => { //Verifica se é admin
-        if (isAdmin) {
-          console.log('✅ O usuário é administrador');
-        } else {
-          console.log('❌ O usuário NÃO é administrador');
-        }
-      });
-      
-    }
+  if (this.loginForm.valid){
+    this.auth.autenticationForLogin(login, password); //Cria autenticação
+    this.auth.autenticationVerifyAcessLevel(login).subscribe(isAdmin => { //Verifica se é admin
+      if (isAdmin) {
+        console.log('✅ O usuário é administrador');
+      } else {
+        console.log('❌ O usuário NÃO é administrador');
+      }
+    });
+    
   }
+}
 
   goToRegister(){
     this.redirectService.navToRegister()

@@ -2,8 +2,10 @@ package application.core.app.services;
 
 import application.core.app.dtos.RegisterRequestDTO;
 import application.core.app.dtos.RegisterResponseDTO;
+import application.core.app.dtos.SessionResponseDTO;
 import application.core.app.models.User;
 import application.core.app.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

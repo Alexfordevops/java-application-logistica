@@ -4,6 +4,7 @@ import application.core.app.dtos.RegisterRequestDTO;
 import application.core.app.dtos.RegisterResponseDTO;
 import application.core.app.requestsBody.LoginRequest;
 import application.core.app.services.LoginService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,14 @@ public class LoginController {
         boolean validPassword = loginService.verifyPassword(request.getLogin(), request.getPassword());
         return ResponseEntity.ok(validPassword);
     }
+
     @PostMapping("/registerUser")
-    public ResponseEntity<RegisterResponseDTO> registerUser(@RequestBody RegisterRequestDTO requestDTO){
+    public ResponseEntity<RegisterResponseDTO> registerUser(@RequestBody RegisterRequestDTO requestDTO) {
         return loginService.registerUser(requestDTO);
     }
+
     @GetMapping("/isAdmin/{login}")
-    public ResponseEntity<Map<String, Boolean>> isAdmin(@PathVariable String login){
+    public ResponseEntity<Map<String, Boolean>> isAdmin(@PathVariable String login) {
         return loginService.isAdmin(login);
     }
 }

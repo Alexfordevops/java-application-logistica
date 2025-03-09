@@ -17,10 +17,12 @@ export class AutenticationService {
     private userApi: UserApiConnectService,
     private storageService: StorageService,
     private http: HttpClient,
-    private endpoint: EndpointsService,
     
   ) { }
-  private loginUser: string = '';
+  private loginUser: string         = '';
+  private setAuthenticationUrl      = "http://localhost:8080/login/setAuthentication"
+  private getAuthenticationLoginUrl = "http://localhost:8080/login/getAuthentication/login"
+  private getAcessLevelUrl          = "http://localhost:8080/login/getAuthentication/acessLevel"
 
   //Autentication session
 
@@ -33,6 +35,7 @@ export class AutenticationService {
         this.userApi.verifyPassword(login, password).subscribe(senhaValida => {
           if (senhaValida) {
             this.storageService.setItem('token', 'user-token'); // Armazena o token
+            this.storageService.setItem('user-login', login); // Armazena o login
             this.router.navigate(['/home']); // Redireciona para o home após o login
           } else {
             alert("Senha inválida");
@@ -60,17 +63,35 @@ export class AutenticationService {
   autenticationVerifyAcessLevel(login:string): Observable<boolean>{
     const endpoint = 'http://localhost:8080/login/isAdmin'
 
-    return this.http.get<{ isAdmin: boolean }>(`${endpoint}/${login}`).pipe( //pipe para retorno boolean true or false
+    return this.http.get<{ isAdmin: boolean }>(`${endpoint}/${login}`, { withCredentials: true }).pipe( //pipe para retorno boolean true or false
       map(response => response.isAdmin)
     );
   }
 
-  setLogin(login: string) {
-    this.loginUser = login;
-    localStorage.setItem('userLogin', login); // Opcional: salvar no localStorage
+  autenticationSetLogin(login: string){
+    this.storageService.setItem(login,"user-login")
   }
 
-  getLogin(): string {
-    return this.loginUser || localStorage.getItem('userLogin') || ''; // Buscar do serviço ou localStorage
+  autenticationGetLogin(){
+    this.storageService.getItem("user-login")
+  }
+
+
+
+
+
+  
+
+  sessionAdmin(): Observable<boolean> {
+    const endpoint = 'http://localhost:8080/login/sessionAdmin';
+
+    return this.http.get<{ isAdmin: boolean }>(endpoint, { withCredentials: true }).pipe(
+      map(response => response.isAdmin)
+    );
+  }
+
+  autenticateUser(login:string): Observable<any>{
+    return this.http.post<string>(`${this.setAuthenticationUrl}/${login}`, {login}, { withCredentials: true });
+
   }
 }
