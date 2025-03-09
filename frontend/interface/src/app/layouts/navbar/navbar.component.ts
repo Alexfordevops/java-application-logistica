@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AutenticationService } from '../../services/autentication/autentication.service';
 import { RedirectService } from '../../services/redirect/redirect.service';
+import { AdminPageComponent } from '../admin-page/admin-page.component';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,10 @@ export class NavbarComponent {
 
   logout(){
     this.auth.autenticationDelete();
+  }
+
+  goToAdmin(){
+    this.redirect.navToAdmin();
   }
 
 }

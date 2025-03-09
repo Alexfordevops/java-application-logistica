@@ -17,4 +17,7 @@ export class RedirectService {
   navToInventory(){
     this.router.navigate(['/inventory'])
   }
+  navToAdmin(){
+    this.router.navigate(['/admin'])
+  }
 }
