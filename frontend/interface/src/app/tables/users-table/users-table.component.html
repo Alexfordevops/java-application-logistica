@@ -1,0 +1,35 @@
+<div class="list-users">
+    <div class="filter">
+        <div class="filter-name">
+            <input #inputRefName type="text" placeholder="Buscar usuário por login" (keyup)="filterByLogin(inputRefName.value)">
+        </div>
+    </div>
+    <table class="table-users">
+        <thead>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>LOGIN</th>
+            <th>STATUS</th>
+            <th>ACCESS_LEVEL</th>
+            <th>CREATION_DATE</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let users of listFilter"
+                [ngStyle]="{'color': allUserColor}"
+                [ngClass]="{
+                    'highlight': users.login === currentUserLogin,
+                    'inactiveUser': users.status === 'Inactive'
+                    }"
+                >
+                <td>{{ users.id }}</td>
+                <td>{{ users.name}}</td>
+                <td >{{ users.login }} {{userLabels[users.login] || ''}}</td>
+                <td>{{users.status}}</td>
+                <td>{{ users.accessLevel}}</td>
+                <td>{{ users.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+              </tr>
+        </tbody>
+    </table>
+    <button (click)="loadUsers()">Atualizar</button>
+</div>
+

@@ -1,0 +1,84 @@
+.list-users {
+    width: 100%;
+    max-width: 1200px;
+    margin: 150px auto; // Movendo mais para baixo
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .filter {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-start;
+
+        .filter-name {
+            input {
+                padding: 10px;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                transition: all 0.3s;
+
+                &:focus {
+                    border-color: #007bff;
+                    outline: none;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                }
+            }
+        }
+    }
+
+    .table-users {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+
+        .highlight {
+            background-color: beige !important;
+            color: darkgreen !important;
+          }
+        
+        .inactiveUser{
+            color: red !important;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tbody tr {
+            &:nth-child(even) {
+                background: #f9f9f9;
+            }
+
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+            background: #0056b3;
+        }
+    }
+}
