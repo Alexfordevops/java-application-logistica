@@ -1,0 +1,26 @@
+<div class="global">
+    <div class="navbar">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="page">
+        <div class="indicators">
+            <div class="indicator-item">
+                <h1>Número de produtos cadastrados: {{productsCount}}</h1>
+            </div>
+            <div class="indicator-item">
+                <h1>Quantidade total de produtos em estoque: {{totalStockItens}}</h1>
+            </div>
+            <div class="indicator-item">
+                <h1>Categorias cadastradas</h1>
+                <h2>{{listCategory}}</h2>
+            </div>
+            <div class="indicator-item">
+                <h1>Quantidade total em estoque por categoria</h1>
+                <div *ngFor="let category of a | keyvalue">
+                    <p>{{ category.key }}: {{ category.value }} itens</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

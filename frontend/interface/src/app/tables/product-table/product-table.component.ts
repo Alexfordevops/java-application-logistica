@@ -10,7 +10,7 @@ import { EndpointsService } from '../../services/endpoints/endpoints.service';
   templateUrl: './product-table.component.html',
   styleUrl: './product-table.component.scss'
 })
-export class ProductTableComponent {
+export class ProductTableComponent implements OnInit {
 
   listProducts: any[] = [];
   listFilter: any[]   = [];

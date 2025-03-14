@@ -31,4 +31,7 @@ export class NavbarComponent {
     this.redirect.navToAdmin();
   }
 
+  goToRelatory(){
+    this.redirect.navToRelatory();
+  }
 }

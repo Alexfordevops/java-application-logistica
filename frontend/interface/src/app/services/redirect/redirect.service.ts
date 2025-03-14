@@ -20,4 +20,7 @@ export class RedirectService {
   navToAdmin(){
     this.router.navigate(['/admin'])
   }
+  navToRelatory(){
+    this.router.navigate(['/relatory'])
+  }
 }

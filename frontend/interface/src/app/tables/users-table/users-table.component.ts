@@ -11,7 +11,7 @@ import { StorageService } from '../../services/autentication/storage-service.ser
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.scss'
 })
-export class UsersTableComponent {
+export class UsersTableComponent implements OnInit {
   
   constructor(
     private http: HttpClient,
