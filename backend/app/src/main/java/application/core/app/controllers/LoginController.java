@@ -1,5 +1,6 @@
 package application.core.app.controllers;
 
+import application.core.app.dtos.ChangeUserStatusResponseDTO;
 import application.core.app.dtos.RegisterRequestDTO;
 import application.core.app.dtos.RegisterResponseDTO;
 import application.core.app.requestsBody.LoginRequest;
@@ -38,5 +39,15 @@ public class LoginController {
     @GetMapping("/isAdmin/{login}")
     public ResponseEntity<Map<String, Boolean>> isAdmin(@PathVariable String login) {
         return loginService.isAdmin(login);
+    }
+
+    @GetMapping("/isActive/{login}")
+    public ResponseEntity<Map<String, Boolean>> isActive(@PathVariable String login){
+        return  loginService.isActive(login);
+    }
+
+    @PutMapping("/changeStatus/{login}")
+    public ResponseEntity<ChangeUserStatusResponseDTO> changeStatus(@PathVariable String login) {
+        return loginService.changeStatus(login);
     }
 }

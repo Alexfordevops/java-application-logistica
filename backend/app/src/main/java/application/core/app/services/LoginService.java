@@ -1,8 +1,6 @@
 package application.core.app.services;
 
-import application.core.app.dtos.RegisterRequestDTO;
-import application.core.app.dtos.RegisterResponseDTO;
-import application.core.app.dtos.SessionResponseDTO;
+import application.core.app.dtos.*;
 import application.core.app.models.User;
 import application.core.app.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -59,5 +57,34 @@ public class LoginService {
                 })
                 .orElse(ResponseEntity.ok(Map.of("isAdmin", false))); // Retorna false se o usuário não for encontrado
     }
-}
 
+    //[GET] Verifica se o user está ativo
+    public ResponseEntity<Map<String, Boolean>> isActive(String login){
+        return userRepository.findByLogin(login)
+                .map(user -> {
+                    boolean isActive = "Active".equals(user.getStatus());
+                    return ResponseEntity.ok(Map.of("isActive", isActive));
+                })
+                .orElse(ResponseEntity.ok(Map.of("isActive", false))); // Retorna false se o usuário não for inativo
+    }
+    //[PUT] Atualiza o status do usuário
+    public ResponseEntity<ChangeUserStatusResponseDTO> changeStatus(String login) {
+        Optional<User> optionalUser = userRepository.findByLogin(login);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            // Alterna o status entre "Active" e "Inactive"
+            String newStatus = "Active".equals(user.getStatus()) ? "Inactive" : "Active";
+            user.setStatus(newStatus);
+            userRepository.save(user);
+
+            // Retorna resposta com o novo status do usuário
+            ChangeUserStatusResponseDTO responseDTO = new ChangeUserStatusResponseDTO(user.getLogin(), newStatus);
+            return ResponseEntity.ok(responseDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+}

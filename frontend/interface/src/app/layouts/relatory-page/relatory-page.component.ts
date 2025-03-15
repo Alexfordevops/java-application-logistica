@@ -79,7 +79,6 @@ export class RelatoryPageComponent  implements OnInit{
     
   }
 
-
   ngOnInit(): void {
       this.loadProducts();
   }

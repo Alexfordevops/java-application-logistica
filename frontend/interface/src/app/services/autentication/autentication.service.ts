@@ -68,11 +68,19 @@ export class AutenticationService {
     );
   }
 
+  autenticationVerifyUserActive(login: string): Observable<boolean>{
+    const endpoint = 'http://localhost:8080/login/isActive'
+
+    return this.http.get<{ isActive: boolean }>(`${endpoint}/${login}`, { withCredentials: true }).pipe( //pipe para retorno boolean true or false
+      map(response => response.isActive)
+    );
+  }
+
   autenticationSetLogin(login: string){
     this.storageService.setItem('user-login', login);
   }
 
   autenticationGetLogin(){
-    this.storageService.getItem("user-login")
+    this.storageService.getItem("user-login");
   }
 }

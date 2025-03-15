@@ -23,4 +23,7 @@ export class RedirectService {
   navToRelatory(){
     this.router.navigate(['/relatory'])
   }
+  navToLogin(){
+    this.router.navigate(['/login'])
+  }
 }

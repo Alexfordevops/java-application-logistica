@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { UserApiConnectService } from '../../services/apiRequest/user-api-connect.service';
 import { AutenticationService } from '../../services/autentication/autentication.service';
+import { RedirectService } from '../../services/redirect/redirect.service';
 
 @Component({
   selector: 'app-register-form',
@@ -19,7 +20,8 @@ export class RegisterFormComponent {
   
     constructor(private fb: FormBuilder,
                 private userApi: UserApiConnectService,
-                private auth: AutenticationService
+                private auth: AutenticationService,
+                private redc: RedirectService
     ) {
   
       this.registerForm = this.fb.group({
@@ -37,6 +39,7 @@ export class RegisterFormComponent {
       if (this.registerForm.valid){
         this.userApi.registerUser(login, this.registerForm.value)
         this.auth.autenticationForRegistry()
+        this.redc.navToLogin();
       }
 
     }

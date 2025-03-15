@@ -24,9 +24,11 @@
                 <td>{{ users.id }}</td>
                 <td>{{ users.name}}</td>
                 <td >{{ users.login }} {{userLabels[users.login] || ''}}</td>
-                <td>{{users.status}}</td>
+                <td>{{users.status}}  </td>
                 <td>{{ users.accessLevel}}</td>
-                <td>{{ users.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ users.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+                     <button (click)="changeIsActive(users.login)">{{isActiveLabel[users.status]}}</button>
+                    </td>
               </tr>
         </tbody>
     </table>

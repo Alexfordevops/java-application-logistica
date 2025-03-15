@@ -32,22 +32,30 @@ export class LoginFormComponent {
     });
   }
 
-OnSubimit(){
-  const login = this.loginForm.value.login;
-  const password = this.loginForm.value.password;
-
-  if (this.loginForm.valid){
-    this.auth.autenticationForLogin(login, password); //Cria autenticação
-    this.auth.autenticationVerifyAcessLevel(login).subscribe(isAdmin => { //Verifica se é admin
-      if (isAdmin) {
-        console.log('✅ O usuário é administrador');
-      } else {
-        console.log('❌ O usuário NÃO é administrador');
-      }
-    });
-    
+  OnSubimit() {
+    const login = this.loginForm.value.login;
+    const password = this.loginForm.value.password;
+  
+    if (this.loginForm.valid) {
+      this.auth.autenticationVerifyUserActive(login).subscribe(isActive => {
+        if (isActive) {
+          this.auth.autenticationForLogin(login, password); // Cria autenticação
+  
+          this.auth.autenticationVerifyAcessLevel(login).subscribe(isAdmin => { // Verifica se é admin
+            if (isAdmin) {
+              console.log('✅ O usuário é administrador');
+            } else {
+              console.log('❌ O usuário NÃO é administrador');
+            }
+          });
+  
+        } else {
+          alert("Usuário desativado");
+          console.log('❌ O usuário está desativado');
+        }
+      });
+    }
   }
-}
 
   goToRegister(){
     this.redirectService.navToRegister()
